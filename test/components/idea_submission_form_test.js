@@ -3,6 +3,7 @@ import { mount } from "enzyme"
 import sinon from "sinon"
 
 import IdeaSubmissionForm from "../../web/static/js/components/idea_submission_form"
+import IdeaRestClient from "../../web/static/js/clients/idea_rest_client"
 
 describe("IdeaSubmissionForm component", () => {
   let wrapper
@@ -15,26 +16,30 @@ describe("IdeaSubmissionForm component", () => {
   }
 
   describe("on submit", () => {
-    it("pushes a `new_idea` event to the retro channel with the idea", () => {
-      const retroChannel = { on: () => {}, push: sinon.spy() }
+    let postSpy
+
+    before(() => {
+      postSpy = sinon.stub(IdeaRestClient, "post")
 
       wrapper = mount(
         <IdeaSubmissionForm
           currentPresence={stubbedPresence}
-          retroChannel={retroChannel}
           showActionItem
         />
       )
+    })
 
+    it("fires a POST request to the 'ideas' REST endpoint", () => {
       wrapper.simulate("submit", fakeEvent)
-
       expect(
-        retroChannel.push.calledWith("new_idea", {
+        postSpy.calledWith({
           category: "happy",
           body: "",
           author: "Mugatu",
-        }
-      )).to.equal(true)
+        })
+      ).to.equal(true)
+
+      postSpy.restore()
     })
   })
 
@@ -64,7 +69,6 @@ describe("IdeaSubmissionForm component", () => {
       wrapper = mount(
         <IdeaSubmissionForm
           currentPresence={stubbedPresence}
-          retroChannel={mockRetroChannel}
           showActionItem
         />
       )
@@ -85,7 +89,6 @@ describe("IdeaSubmissionForm component", () => {
       wrapper = mount(
         <IdeaSubmissionForm
           currentPresence={stubbedPresence}
-          retroChannel={mockRetroChannel}
           showActionItem
         />
       )
@@ -104,7 +107,6 @@ describe("IdeaSubmissionForm component", () => {
         wrapper = mount(
           <IdeaSubmissionForm
             currentPresence={stubbedPresence}
-            retroChannel={mockRetroChannel}
             showActionItem={false}
           />
         )
@@ -134,7 +136,6 @@ describe("IdeaSubmissionForm component", () => {
       wrapper = mount(
         <IdeaSubmissionForm
           currentPresence={stubbedPresence}
-          retroChannel={mockRetroChannel}
           showActionItem
         />
       )
@@ -149,7 +150,6 @@ describe("IdeaSubmissionForm component", () => {
       wrapper = mount(
         <IdeaSubmissionForm
           currentPresence={stubbedPresence}
-          retroChannel={mockRetroChannel}
           showActionItem={false}
         />
       )
