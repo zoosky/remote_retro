@@ -2,6 +2,10 @@
   content: "" !important;
 }
 
+.video video {
+  height: 5rem;
+}
+
 .picture {
   display: inline-block;
   height: 75px;
