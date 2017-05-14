@@ -13,7 +13,6 @@ function UserList(props) {
 
   return (
     <section className="ui center aligned basic segment">
-      <div id="remoteVideos" />
       <ul id="user-list" className="ui horizontal list">
         {listItems}
       </ul>

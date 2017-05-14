@@ -8,7 +8,7 @@ function UserListItem(props) {
   return (
     <li className={`item ${styles.wrapper}`}>
       <div className="ui center aligned grid">
-        <div id={`${window.userToken}-video`} className={styles.video} />
+        <div id={`${window.userToken}-video-container`} className={styles.video} />
         {IconTag(props.user)}
         <div className="ui row">
           <p className={styles.name}>{ userName }</p>
