@@ -109,6 +109,11 @@ class RemoteRetro extends Component {
     webrtc.on("readyToCall", () => {
       webrtc.joinRoom(window.retroUUID)
     })
+
+    webrtc.on("peerStreamAdded", (peer) => {
+      debugger
+      console.log('awwwwww yeah')
+    })
   }
 
   render() {
