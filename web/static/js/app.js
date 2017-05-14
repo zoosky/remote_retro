@@ -28,6 +28,10 @@ webrtc.on('readyToCall', () => {
   webrtc.joinRoom(window.retroUUID)
 })
 
+webrtc.on("peerStreamAdded", (peer) => {
+  debugger
+  console.log('awwwwww yeah')
+})
 const reactRoot = document.querySelector(".react-root")
 
 render(
