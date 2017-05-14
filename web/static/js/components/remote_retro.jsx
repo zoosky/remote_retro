@@ -102,7 +102,6 @@ class RemoteRetro extends Component {
 
     const webrtc = new SimpleWebRTC({
       localVideoEl: `${userToken}-video-container`,
-      // immediately ask for camera access
       autoRequestMedia: true,
       nick: userToken,
     })
