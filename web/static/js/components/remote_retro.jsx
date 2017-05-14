@@ -1,5 +1,6 @@
 import React, { Component, PropTypes } from "react"
 import { Presence } from "phoenix"
+import SimpleWebRTC from "simplewebrtc"
 import update from "immutability-helper"
 
 import * as AppPropTypes from "../prop_types"
@@ -97,6 +98,17 @@ class RemoteRetro extends Component {
     retroChannel.on("idea_deleted", deletedIdea => {
       const ideas = this.state.ideas.filter(idea => idea.id !== deletedIdea.id)
       this.setState({ ideas })
+    })
+
+    const webrtc = new SimpleWebRTC({
+      localVideoEl: `${userToken}-video-container`,
+      // immediately ask for camera access
+      autoRequestMedia: true,
+      nick: userToken,
+    })
+
+    webrtc.on("readyToCall", () => {
+      webrtc.joinRoom(window.retroUUID)
     })
   }
 

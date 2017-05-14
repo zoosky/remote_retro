@@ -23,7 +23,6 @@
     <%= if @view_module.include_js do %>
       <script>window.userToken = "<%= assigns[:user_token] %>"</script>
       <script>window.retroUUID = "<%= assigns[:retro_uuid] %>"</script>
-      <script src="https://simplewebrtc.com/latest-v2.js"></script>
       <script src="<%= static_path(@conn, "/js/app.js") %>"></script>
     <% end %>
   </body>
