@@ -100,20 +100,24 @@ class RemoteRetro extends Component {
       this.setState({ ideas })
     })
 
-    const webrtc = new SimpleWebRTC({
-      localVideoEl: `${userToken}-video-container`,
-      autoRequestMedia: true,
-      nick: userToken,
-    })
+    const timeout = setTimeout(() => {
+      const webrtc = new SimpleWebRTC({
+        localVideoEl: `${userToken}-video-container`,
+        autoRequestMedia: true,
+        nick: userToken,
+      })
 
-    webrtc.on("readyToCall", () => {
-      webrtc.joinRoom(window.retroUUID)
-    })
+      webrtc.on("readyToCall", () => {
+        webrtc.joinRoom(window.retroUUID)
+      })
 
-    webrtc.on("videoAdded", (video, peer) => {
-      let newPresences = updatePresences(this.state.presences, peer.nick, { video })
-      this.setState({ presences: newPresences })
-    })
+      webrtc.on("videoAdded", (video, peer) => {
+        let newPresences = updatePresences(this.state.presences, peer.nick, { video })
+        this.setState({ presences: newPresences })
+      })
+
+      clearTimeout(timeout)
+    }, 500)
   }
 
   render() {
