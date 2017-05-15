@@ -1,30 +1,33 @@
-import React from "react"
+import React, { Component } from "react"
 import * as AppPropTypes from "../prop_types"
 import styles from "./css_modules/user_list_item.css"
 
-function UserListItem(props) {
-  let userName = props.user.given_name
-  if (props.user.is_facilitator) userName += " (Facilitator)"
-  return (
-    <li className={`item ${styles.wrapper}`}>
-      <div className="ui center aligned grid">
-        <div id={`${window.userToken}-video-container`} className={styles.video} />
-        {IconTag(props.user)}
-        <div className="ui row">
-          <p className={styles.name}>{ userName }</p>
-          <p className={`${styles.ellipsisAnim} ui row`}>
-            { props.user.is_typing &&
-              <span>
-                <i className="circle icon" />
-                <i className="circle icon" />
-                <i className="circle icon" />
-              </span>
-            }
-          </p>
+class UserListItem extends Component {
+  render() {
+    let userName = this.props.user.given_name
+    if (this.props.user.is_facilitator) userName += " (Facilitator)"
+
+    return (
+      <li className={`item ${styles.wrapper}`}>
+        <div className="ui center aligned grid">
+          <div id={`${this.props.user.token}-video-container`} className={styles.video}>
+          </div>
+          <div className="ui row">
+            <p className={styles.name}>{ userName }</p>
+            <p className={`${styles.ellipsisAnim} ui row`}>
+              { this.props.user.is_typing &&
+                <span>
+                  <i className="circle icon" />
+                  <i className="circle icon" />
+                  <i className="circle icon" />
+                </span>
+              }
+            </p>
+          </div>
         </div>
-      </div>
-    </li>
-  )
+      </li>
+    )
+  }
 }
 
 const IconTag = user => {
