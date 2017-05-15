@@ -235,7 +235,7 @@ asynckit@^0.4.0:
   version "0.4.0"
   resolved "https://registry.yarnpkg.com/asynckit/-/asynckit-0.4.0.tgz#c79ed97f7f34cb8f2ba1bc9790bcc366474b4b79"
 
-attachmediastream@^1.4.1:
+attachmediastream@^1.4.1, attachmediastream@^1.4.2:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/attachmediastream/-/attachmediastream-1.4.2.tgz#b77564c733489610a6eb4d9096f098818e437d1e"
   dependencies:

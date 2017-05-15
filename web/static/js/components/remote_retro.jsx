@@ -110,9 +110,9 @@ class RemoteRetro extends Component {
       webrtc.joinRoom(window.retroUUID)
     })
 
-    webrtc.on("peerStreamAdded", (peer) => {
-      debugger
-      console.log('awwwwww yeah')
+    webrtc.on("videoAdded", (video, peer) => {
+      let newPresences = updatePresences(this.state.presences, peer.nick, { video })
+      this.setState({ presences: newPresences })
     })
   }
 

@@ -7,6 +7,7 @@
     "postinstall": "cp -rf node_modules/semantic-ui-css/ priv/static/css/semantic-ui/"
   },
   "dependencies": {
+    "attachmediastream": "^1.4.2",
     "babel-plugin-transform-object-rest-spread": "^6.22.0",
     "babel-preset-react": "^6.16.0",
     "babel-register": "^6.22.0",

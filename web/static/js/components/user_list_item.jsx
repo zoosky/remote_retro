@@ -3,19 +3,28 @@ import * as AppPropTypes from "../prop_types"
 import styles from "./css_modules/user_list_item.css"
 
 class UserListItem extends Component {
+  componentDidUpdate(){
+    if (this.props.user.video) {
+      this.videoContainer.appendChild(this.props.user.video)
+    }
+  }
+
   render() {
-    let userName = this.props.user.given_name
-    if (this.props.user.is_facilitator) userName += " (Facilitator)"
+    const { user } = this.props
+    let userName = user.given_name
+    if (user.is_facilitator) userName += " (Facilitator)"
 
     return (
       <li className={`item ${styles.wrapper}`}>
         <div className="ui center aligned grid">
-          <div id={`${this.props.user.token}-video-container`} className={styles.video}>
-          </div>
+          { (user.video || user.token === window.userToken) ?
+              <div id={`${user.token}-video-container`} ref={videoContainer => this.videoContainer = videoContainer} className={styles.video} />
+              : <img className={styles.picture} src={user.picture.replace("sz=50", "sz=200")} alt={user.given_name} />
+          }
           <div className="ui row">
             <p className={styles.name}>{ userName }</p>
             <p className={`${styles.ellipsisAnim} ui row`}>
-              { this.props.user.is_typing &&
+              { user.is_typing &&
                 <span>
                   <i className="circle icon" />
                   <i className="circle icon" />
@@ -28,19 +37,6 @@ class UserListItem extends Component {
       </li>
     )
   }
-}
-
-const IconTag = user => {
-  let icon
-
-  if (user.picture) {
-    const src = user.picture.replace("sz=50", "sz=200")
-    icon = <img className={styles.picture} src={src} alt={user.given_name} />
-  } else {
-    icon = <i className="huge user icon" />
-  }
-
-  return icon
 }
 
 UserListItem.propTypes = {
