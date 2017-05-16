@@ -101,22 +101,36 @@ class RemoteRetro extends Component {
     })
 
     const timeout = setTimeout(() => {
-      const webrtc = new SimpleWebRTC({
-        localVideoEl: `${userToken}-video-container`,
-        autoRequestMedia: true,
-        nick: userToken,
-      })
+      let peerConnectionConfig
+      $(document).ready(() => {
+        $.get("https://service.xirsys.com/ice", {
+          ident: "vanderhoop",
+          secret: "82b5a4fc-3a2b-11e7-85a3-64eeb285e4c6",
+          domain: "www.remote-retro-stride.org",
+          application: "default",
+          room: "default",
+          secure: 1,
+        }, (data, status) => {
+          peerConnectionConfig = data.d
+          const webrtc = new SimpleWebRTC({
+            localVideoEl: `${userToken}-video-container`,
+            autoRequestMedia: true,
+            nick: userToken,
+            peerConnectionConfig,
+          })
 
-      webrtc.on("readyToCall", () => {
-        webrtc.joinRoom(window.retroUUID)
-      })
+          webrtc.on("readyToCall", () => {
+            webrtc.joinRoom(window.retroUUID)
+          })
 
-      webrtc.on("videoAdded", (video, peer) => {
-        let newPresences = updatePresences(this.state.presences, peer.nick, { video })
-        this.setState({ presences: newPresences })
-      })
+          webrtc.on("videoAdded", (video, peer) => {
+            let newPresences = updatePresences(this.state.presences, peer.nick, { video })
+            this.setState({ presences: newPresences })
+          })
 
-      clearTimeout(timeout)
+          clearTimeout(timeout)
+        })
+      })
     }, 500)
   }
 
