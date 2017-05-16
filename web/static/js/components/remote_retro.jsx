@@ -116,6 +116,7 @@ class RemoteRetro extends Component {
             localVideoEl: `${userToken}-video-container`,
             autoRequestMedia: true,
             nick: userToken,
+            debug: true,
             peerConnectionConfig,
           })
 
