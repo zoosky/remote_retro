@@ -18,6 +18,8 @@ const store = configureStore(retroChannel)
 const actionz = bindActionCreators({ ...actions }, store.dispatch)
 
 retroChannel = applyListenersWithDispatch(retroChannel, store, actionz)
+retroChannel.socket.onError( () => console.log("the connection errored") )
+retroChannel.socket.onClose( () => console.log("the connection dropped") )
 
 retroChannel.join()
   .receive("error", error => console.error(error))
