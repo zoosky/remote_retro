@@ -12,7 +12,7 @@ const { VOTING } = STAGES
 class VoteCounter extends React.Component {
   handleClick = () => {
     const { idea, retroChannel, currentUser } = this.props
-    retroChannel.push("vote_submitted", { ideaId: idea.id, userId: currentUser.id })
+    retroChannel.push("vote_submitted", { userId: currentUser.id })
   }
 
   render() {
