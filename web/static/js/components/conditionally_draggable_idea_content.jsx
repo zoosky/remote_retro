@@ -38,6 +38,7 @@ const ConditionallyDraggableIdeaContent = props => {
             retroChannel={retroChannel}
             currentUser={currentUser}
             stage={stage}
+            canUserEditIdeaContents={canUserEditIdeaContents}
           />
           <div className="text">
             <span data-hj-masked>{ idea.body }</span>

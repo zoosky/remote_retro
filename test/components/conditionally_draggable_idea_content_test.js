@@ -14,7 +14,7 @@ describe("<ConditionallyDraggableIdeaContent />", () => {
     currentUser: {},
     retroChannel: {},
     stage: IDEA_GENERATION,
-    canUserEditIdeaContents: false,
+    canUserEditIdeaContents: true,
   }
 
   it("renders the control icons before idea body text to ensure floating/text-wrapping", () => {
