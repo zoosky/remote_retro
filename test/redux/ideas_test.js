@@ -154,6 +154,35 @@ describe("actionCreators", () => {
     })
   })
 
+  describe("ideaDroppedInNewLocation", () => {
+    const idea = { body: "we have a linter!", category: "happy", user_id: 1 }
+
+    it("returns a thunk", () => {
+      const result = actionCreators.ideaDroppedInNewLocation(idea)
+      expect(result).to.be.a("function")
+    })
+
+    describe("invoking the returned function", () => {
+      let thunk
+      const getStateStub = () => {}
+
+      beforeEach(() => {
+        thunk = actionCreators.ideaDroppedInNewLocation({ id: 23, x: 65, y: 99 })
+      })
+
+      it("dispatches an action to the store, informing it that the idea has been updated", () => {
+        const dispatchSpy = sinon.spy()
+        thunk(dispatchSpy, getStateStub)
+
+        expect(dispatchSpy).calledWith({
+          type: "IDEA_UPDATE_COMMITTED",
+          ideaId: 23,
+          newAttributes: { x: 65, y: 99 },
+        })
+      })
+    })
+  })
+
   describe("updateIdea", () => {
     it("creates an action to update an idea with particular id with new attributes", () => {
       const ideaId = 999

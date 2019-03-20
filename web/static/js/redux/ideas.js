@@ -25,6 +25,13 @@ export const actions = {
     idea,
   }),
 
+  ideaDroppedInNewLocation: ({ id, x, y }) => {
+    return dispatch => {
+      const updateIdeaAction = updateIdea(id, { x, y })
+      dispatch(updateIdeaAction)
+    }
+  },
+
   submitIdeaEditAsync: ideaParams => {
     return (dispatch, getState, retroChannel) => {
       const push = retroChannel.push("idea_edited", ideaParams)

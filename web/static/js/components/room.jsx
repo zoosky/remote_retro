@@ -1,4 +1,5 @@
 import React from "react"
+import PropTypes from "prop-types"
 import PrimeDirectiveStage from "./prime_directive_stage"
 import LobbyStage from "./lobby_stage"
 import IdeaGenerationStage from "./idea_generation_stage"
@@ -49,6 +50,7 @@ const Room = props => {
 Room.propTypes = {
   stage: AppPropTypes.stage.isRequired,
   currentUser: AppPropTypes.presence.isRequired,
+  actions: PropTypes.object.isRequired,
 }
 
 export default Room

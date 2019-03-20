@@ -21,6 +21,7 @@ describe("Room", () => {
     ideas: [],
     facilitatorName: "Dirk",
     currentUser: { is_facilitator: false, token: "33ndk" },
+    actions: {},
   }
 
   describe("when the stage is lobby", () => {
